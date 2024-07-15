@@ -5,7 +5,7 @@ on:
   
 env:
   IMAGE: ${{secrets.DOCKER_USER}}/ubuntu-patched
-  TAG: $(date +%s)
+  TAG: 1.0.5
   
 jobs:
   image-lifecycle:
