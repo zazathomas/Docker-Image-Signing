@@ -40,5 +40,7 @@ jobs:
     - name: Verify image signature
       run: |
         sudo apt install jq -y
-        cosign verify --key cosign.pub ${{env.IMAGE}} | jq .
+        cosign verify --key cosign.pub ${{env.IMAGE}}:${{env.TAG}} | jq .
+    - name: Docker logout
+      run: docker logout
       
