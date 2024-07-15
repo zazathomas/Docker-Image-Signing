@@ -22,12 +22,15 @@ jobs:
     - name: Push to Docker
       run: docker push ${{env.IMAGE}}
     - name: Retrieve image digest
-      run: export IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{env.IMAGE}})
+      run: |
+        export IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{env.IMAGE}})
+        echo "Image digest is $IMAGE_DIGEST"
     - name: Setup Cosign
       run: |
         curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
         sudo mv cosign-linux-amd64 /usr/local/bin/cosign
         sudo chmod +x /usr/local/bin/cosign
+        cosign version
     - name: Sign image using Cosign
       run: |
         echo ${{secrets.COSIGN_KEY}} > cosign.key
