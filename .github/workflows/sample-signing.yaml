@@ -14,9 +14,11 @@ jobs:
     - name: Setup Docker
       uses: docker/setup-buildx-action@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{env.IMAGE}}
+      run: docker build . --file Dockerfile --tag sample-image:1.0.0
     - name: Login to Docker
       run: echo ${{secrets.DOCKER_TOKEN}} | docker login -u ${{secrets.DOCKER_USER}} --password-stdin
+    - name: Tag image
+      run: docker tag sample-image:1.0.0 ${{env.IMAGE}
     - name: Push to Docker
       run: docker push ${{env.IMAGE}}
     - name: Retrieve image digest
