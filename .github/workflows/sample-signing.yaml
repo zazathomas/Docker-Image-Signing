@@ -23,7 +23,7 @@ jobs:
       run: docker push ${{env.IMAGE}}
     - name: Retrieve image digest
       run: |
-        docker inspect --format='{{index .RepoDigests 0}}' ${{env.IMAGE}}) > image_digest.txt
+        docker inspect --format='{{index .RepoDigests 0}}' ${{env.IMAGE}} > image_digest.txt
         echo "Digest is..."
         cat image_digest.txt
     - name: Setup Cosign
