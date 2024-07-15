@@ -39,6 +39,6 @@ jobs:
         cosign-password: ${{ secrets.COSIGN_PASSWORD }}
     - name: Verify image signature
       run: |
-        apt install jq -y
+        sudo apt install jq -y
         cosign verify --key cosign.pub ${{env.IMAGE}} | jq .
       
