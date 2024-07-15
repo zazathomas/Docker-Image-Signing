@@ -1,0 +1,30 @@
+name: Build, Push & Sign Docker Image
+
+on:
+  workflow_dispatch:
+  
+env:
+  IMAGE: ${{secrets.DOCKER_USER}}/ubuntu-patched:$(date +%s)
+  
+jobs:
+  image-lifecycle:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Docker
+      uses: docker-practice/actions-setup-docker@v1
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${{env.IMAGE}}
+    - name: Login to Docker
+      run: echo ${{secrets.DOCKER_TOKEN}} | docker login -u ${{secrets.DOCKER_USER}} --password-stdin
+    - name: Push to Docker
+      run: docker push ${{env.IMAGE}}
+    - name: Retrieve image digest
+      run: export IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{env.IMAGE}})
+    - name: Sign image using Cosign
+      run: cosign sign --key ${{secrets.COSIGN_KEY}} $IMAGE_DIGEST
+    - name: Verify image signature
+      run: |
+        apt install jq -y
+        cosign verify --key cosign.pub ${{env.IMAGE}} | jq .
+      
