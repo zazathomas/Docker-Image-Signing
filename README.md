@@ -25,4 +25,4 @@ To get started with cosign, install it using the commands as shown below:
 
 ### Further comments
 It is always good practice to have the generated private key stored in a secrets manager like Vault or AWS secrets manager. The ideal workflow for signing images is to include the signing commands after CI commands that push the images to the given repository.
-Included in this repository is a [sample-signing.yaml(https://github.com/zazathomas/image-signing/blob/main/.github/workflows/sample-signing.yaml) file which is a GitHub actions workflow for signing images after pushing to dockerhub. Reuse this file by modifying the image, public & private keys as required.
+Included in this repository is a [sample-signing.yaml](https://github.com/zazathomas/docker-image-signing/blob/main/.github/workflows/sample-signing.yaml) file which is a GitHub actions workflow for signing images after pushing to dockerhub. Reuse this file by modifying the image, public & private keys as required.
