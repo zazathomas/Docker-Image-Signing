@@ -23,8 +23,9 @@ jobs:
       run: docker push ${{env.IMAGE}}
     - name: Retrieve image digest
       run: |
-        export IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{env.IMAGE}})
-        echo "Image digest is $IMAGE_DIGEST"
+        docker inspect --format='{{index .RepoDigests 0}}' ${{env.IMAGE}}) > image_digest.txt
+        echo "Digest is..."
+        cat image_digest.txt
     - name: Setup Cosign
       run: |
         curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"
