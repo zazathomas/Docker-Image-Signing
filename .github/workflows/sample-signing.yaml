@@ -29,7 +29,9 @@ jobs:
         sudo mv cosign-linux-amd64 /usr/local/bin/cosign
         sudo chmod +x /usr/local/bin/cosign
     - name: Sign image using Cosign
-      run: cosign sign --key ${{secrets.COSIGN_KEY}} $IMAGE_DIGEST
+      run: |
+        echo ${{secrets.COSIGN_KEY}} > cosign.key
+        cosign sign --key cosign.key $IMAGE_DIGEST
     - name: Verify image signature
       run: |
         apt install jq -y
