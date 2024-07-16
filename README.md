@@ -46,7 +46,7 @@ The kyverno resources have now been deployed to the cluster.
 ### Generate cosign key pair
 `cosign generate-key-pair`
 
-Now let's test deploying a sample unsigned image before apply the image verification policy.
+Now let's test the default cluster configuration by deploying a sample unsigned image before apply the image verification policy.
 
 `kubectl run random-app --image=zazathomas/silly-demo:1.0.10`
 
