@@ -7,6 +7,7 @@ Kyverno has a comprehensive [library](https://kyverno.io/policies/) of policies 
 
 [Cosign](https://github.com/sigstore/cosign) is the main tool of focus here for signing images. Cosign works by using a private key to write a signature to the image repository. This signature can then
 be verified by using the public key.
+
 ---
 ### Linux binary Install steps
 `curl -O -L "https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64"`
@@ -39,7 +40,7 @@ be verified by using the public key.
 
 `terraform apply`
 
-The kyverno resources have now been applied to the cluster.
+The kyverno resources have now been deployed to the cluster.
 ![alt text](assets/image.png)
 
 ### Generate cosign key pair
